@@ -1,0 +1,1 @@
+Not much worth nothing since it's mostly still a very high level overview of deep learning; covering the simplest neural network, some history, why deep learning is taking off, how to use this platform etc.
