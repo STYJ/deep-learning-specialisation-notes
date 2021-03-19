@@ -1,0 +1,5 @@
+- You pass the output of 1 layer as input into the next layer
+- Training set contains multiple tuples of (input e.g. a vector of features, an output)
+- The hidden layer is not observed.
+- X can alternatively be represented as a superscript [0] i.e. a[0] where a stands for the activation function and [0] stands for layer 0.
+- When counting number of layers, we don't include the input layer so if the hidden layer has 4 layers, it is a 5 layer NN since you have to add 1 for the output layer.
