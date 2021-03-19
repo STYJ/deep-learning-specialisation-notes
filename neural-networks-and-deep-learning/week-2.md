@@ -20,4 +20,12 @@
         - Calculate current loss (forward propagation)
         - Calculate current gradient (backward propagation)
         - Update parameters (gradient descent)
-You often build 1-3 separately and integrate them into one function we call model().
+
+- You often build 1-3 separately and integrate them into one function we call model().
+- initialize() is step 2
+- propagate() is steps 3a and 3b
+- optimize() is the loop and step 3c
+- model() is the everything
+
+- Preprocessing the dataset is important 
+- Modifying the learning rate, number of iterations are all hyperparameters.
