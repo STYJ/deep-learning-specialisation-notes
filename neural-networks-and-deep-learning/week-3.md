@@ -3,3 +3,12 @@
 - The hidden layer is not observed.
 - X can alternatively be represented as a superscript [0] i.e. a[0] where a stands for the activation function and [0] stands for layer 0.
 - When counting number of layers, we don't include the input layer so if the hidden layer has 4 layers, it is a 5 layer NN since you have to add 1 for the output layer.
+- Tanh as an activation function is almost always superior to the sigmoid function because the mean is closer to 0 (tanh goes between 1 and -1). This makes training subsequent layers easier. The only time when a sigmoid activation function might be better is for the last layer of binary classification since binary classification is about returning 0 or 1 so by returning a value between 0 or 1 (sigmoid), you can just round to the closest integer to get 0 or 1.
+- different layers can have different activation functions. Just denote as g[layer #]
+- A disadvantage of both sigmoid and tanh is that if Z returns a large value, the gradient is close to 0 so this will slow down gradient descend.
+- ReLU is the most common activation function.
+- If you're not sure which activation function to use best, try them all then evaluate the prediction.
+- A composition of multiple linear activation functions is still a linear function so might as well not have hidden layers.
+- The only situation where it might make SOME ssense to use a linear activation function is for linear regression problems e.g. predicting the price of a house but even then, you only use it at the last layer.
+- sometimes just ensuring that your dimensions match up will eliminate a lot of bugs
+- notation = a superscript [2](12) subscript (6) = layer 2, 12th training example, node 6 in layer 2.
