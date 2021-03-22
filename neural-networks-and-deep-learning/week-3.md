@@ -12,3 +12,30 @@
 - The only situation where it might make SOME ssense to use a linear activation function is for linear regression problems e.g. predicting the price of a house but even then, you only use it at the last layer.
 - sometimes just ensuring that your dimensions match up will eliminate a lot of bugs
 - notation = a superscript [2](12) subscript (6) = layer 2, 12th training example, node 6 in layer 2.
+
+# Dimensions
+W1 = (number of nodes in layer 1, number of inputs from prev layer i.e. number of inputs)
+X = (number of inputs from prev layer, number of training sets)
+b1 = (number of nodes in layer 1, number of training sets)
+Z1 = W1.X + b = same dims as b1 = A1
+
+W2 = (number of nodes in layer 2, number of inputs from prev layer i.e. number of nodes in layer 1)
+A1 = same as Z1 = (number of nodes in layer 1, number of training sets)
+b2 = (number of nodes in layer 2, number of training sets)
+Z2 = W2.A1 + b = same dims as b2 = b2
+
+
+- When initialising the values for W1 and W2, remember to initialise with random values instead of zeroes and multiply it with a really small number e.g. 0.001. Sometimes you might use other small values. The reason for the random values because if you use zeros, all nodes in the hiddle layer will effectively compute the same values i.e. 100 nodes has the same performance as 1 node. The reason for multiplying it with a small value is because if we use a big value then the outputs of the activation functions e.g. sigmoid, tanh would be a large value i.e. the derivative of it is close to 0 so learning will be very slow.
+- If there are too many nodes in the hidden layer, the model is prone to overfitting. You can use regularization to somewhat work around this.
+
+The general algorithm is still the same:
+1. Initialise W1, b1, W2, b2 = params
+2. Loop for the number of iterations
+    - calc forward propagation(X, params), returns A2, cache (A1, Z1, A2, Z2)
+    - compute cost(A2, Y, params), returns cost (average mistakes in %)
+    - calc gradients with backwards propagation(params, cache, X and Y), returns grads (dW1, db1, dW2, db2)
+    - update params(params, grads) e.g. w = w - learning_rate * dW1, returns updated params
+    - optionally print 
+3. Once training is done, return the params
+4. With the final set of params, use it to do forward propagation to predict Y hat
+5. If you want binary then if Y hat is a value > 0.5, you might give it a value of 1 etc.
