@@ -1,0 +1,9 @@
+- It's hard to say for certain how many layers in a neural network is enough so just try a few models. Number of layers is a hyperparameter!
+- Similar to how you cannot replace the for loop for the number of iterations to train the model on, you also cannot avoid using a for loop for the inner layers of a network. This means an algo is O(il) where i = number of iterations and l = number of layers.
+- dimensions of W[l] = (n[l], n[l-1])
+- dimensions of b[l] = (n[l], m)
+- dimensions of Z[l] = g[l](a[l]) = (n[l], m)
+- derivatives don't change the dimension of a vector
+- The earlier layers of a deep NN is to recognise more fundamental / simpler shapes like lines, circles edges. Subsequent layers build on these knowledge to recognise more complex pattersn e.g. parts of a face and then finally moving on to recognising what it was supposed to solve e.g. if an image is a human.
+- according to circuit theory, shallow (few number of layers) NN will require exponentially more neurons per layer than compared to that of a deep but "small" (few number of neurons per layer) NN.
+- [summary of l layer back propagation](https://www.docdroid.net/b2046PI/matrix-derivative-pdf)
