@@ -3,6 +3,7 @@
 - Biggest disadvantage to SGD is that you remove almost all the benefits of vectorisation. It is also extremely noisy and will never converge to a minimum.
 - From an algorithm pov, it is exactly the same except there is an additional for loop that loops through all the batches. There are some new notions (see notes) using {t} to indicate which batch the training examples belong to.
 - You can do what is known as gradient descent with momentum so that each step you take with GD takes the previous X steps into consideration (based on whatever value you use for beta)
+- Maybe you might need to consider bias correction so that the first few values is not completely off because normally you initialise the first theta as 0.
 - You can also use what is known as RMSProp to help move your steps more in some direction e.g. X axis and less in another direction. This allows you to use a larger learning rate without having to worry about going completely offtrack
 - ADAM optimisation = mini batch GD + momentum GD + RMS prop
 - Learning rate decay helps your W and b converge better. What algorithm to use and what values to use in those algo are all hyperparameters but you don't need to worry too much about these. Picking a good learning rate is more important.
