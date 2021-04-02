@@ -1,0 +1,11 @@
+- Some hyperparameters are more important than others e.g. learning rate, momentum beta, mini batch size, # hidden units
+- Randomly sample your hyperparameters instead of doing it systematically.
+- Sometimes if you find a range of values where the values of the hyperparameters used return better values then perhaps you can sample within that range instead of the entire possible set of values.
+- Choose the right scale to uniformly sample at random your hyper parameters
+- Batch norm to normalise the values of Z[l] so that after you calculate a[l], you can use it to train W[l+1] and b[l+1] faster since a[l] is more spherical instead of elongated!
+- Batch norm is updated the same way you'd update W and b with the derivative.
+- the b term in Z = WX + b effectively gets replaced w/ beta[l] from batch norm.
+- batch norm reduces the problem of the input values changing, it really causes these values to become more stable, so that the later layers of the neural network has more firm ground to stand on.
+- batch norn also adds a little noise to the hidden units and this acts like a SLIGHT regularization effect. Larger batch size also reduces this effect. Don't use batch norm for regularization!!!
+- You can use a softmax function instead of other activation functions if you need to do multi class classification. This works because the softmax function expects a vector as input since it needs all values to calculate the sum which is used to normalise each input.
+- Softmax regression or the softmax activation function generalizes the logistic activation function to C classes rather than just two classes. If C = 2, softmax = logistic regression.
