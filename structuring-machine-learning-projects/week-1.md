@@ -1,0 +1,9 @@
+- It doesn't make sense to try anything possible to improve your ML accuracy. Different problems have different ways of optimising it e.g. if you're overfitting, you don't need to try different initialization methods.
+- Orthogonalization is like tuning one parameter at a time as opposed to trying to tune multiple parameters with 1 action.
+- In the context of ML, this means performs well on the training (bigger network, better optimisation algo etc.), dev (regularization, bigger dev set etc.), test set (bigger dev set etc.) and real world data (change dev set, cost function etc.).
+- Early stopping is an approach that Andrew doesn't use much because it couples the accuracy on the training set with the accuracy of the dev set. It's basically trying to juggle between fitting the training data well (low bias) and fitting the dev set well (low variance).
+- Precision - what % of the images are actually cats?
+- Recall - what % of actual cats are correctly recognised?
+- If you have multiple evaluation metrics like precision and recall, it's hard to quickly pick which one is better. If you just focused on one e.g. the higher the precision, the better the classifier then it is trivial to pick the model with the highest precision.
+- Optimizing metric is the one you want the highest possible. Usually just 1 metric.
+- Satisficing metric is one that as long as a condition is met e.g. runtime below 100ms, it doesn't matter low it is e.g. 10ms vs 99ms. Usually N - 1 metrics.
