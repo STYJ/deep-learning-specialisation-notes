@@ -7,3 +7,19 @@
 - If you have multiple evaluation metrics like precision and recall, it's hard to quickly pick which one is better. If you just focused on one e.g. the higher the precision, the better the classifier then it is trivial to pick the model with the highest precision.
 - Optimizing metric is the one you want the highest possible. Usually just 1 metric.
 - Satisficing metric is one that as long as a condition is met e.g. runtime below 100ms, it doesn't matter low it is e.g. 10ms vs 99ms. Usually N - 1 metrics.
+- Properly picking your test and dev set data can help to improve efficiency of your training e.g. train and dev set to be of the same distribution.
+- Your dev set and the single evaluation metric is like telling your team where the bullseye is at. Your team can try many ideas (shooting arrows) at the target but if your information is wrong, then the time would not be well spent or like for example, the training set is 1 bullseye and the dev set is another bullseye in another location.
+- choose a dev set and test set to reflect data you expect to get in future and consider important to do well on.
+- Size of the dev and test set should be big enough to give you high confidence of the performance of your system. It should also be representative of future data it has not seen.
+- Dont be fixated by the 70/30 split between training and dev set. If you have a lot of data, it is okay to use 98/1/1 for the train/dev/test split. As long as your test set is representative of the training data and the data you want to predict and is from the same distribution.
+- If the algorithm that is ranked best according to your evaluation metric is not aligned with you / your users then it should be changed.
+- Defining the metric is like placing a target. Scoring well on this metric (landing bullseye) is another step. This is an example of orthogonalization.
+- Doing well on dev / test set does not correspond to doing well on data it has not seen before. Change your metric, dev / test sets accordingly.
+- There's no perfect evaluation metric, just pick something logical and iterate often. If it's wrong, change it.
+- Bayes optimal error is like the theoretical minimum error that you can never pass. Human level error is often time very close to bayes error for many types of tasks e.g. deciding if a picture is a cat or not.
+- Avoidable bias = bayes error - current error. If avoidable bias is high, then you want to use bias reduction techniques. If it's low, then you can consider using variance reduction techniques so it fits the dev set well (assuming it is not fitting very well...)
+- Since human level performance (error) is an estimate of bayes error, it helps you to more quickly decide whether or not you should focus on reducing bias or reducing variance.
+- This doesnt work if you already surpassed human level performance.
+- To reduce bias, use a bigger model, train longer or with better optimisation algorithms or maybe even use an entirely different NN architecture.
+- To reduce variance, use more data, regularisation or change to a different NN architecture
+- Sometimes if you have new input data that's from a different distribution, it is still ok to add them into the training set as long as you also add them into the dev and test sets. What matters is that the dev and test sets are of the same distribution.
