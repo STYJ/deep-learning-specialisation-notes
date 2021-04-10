@@ -1,0 +1,22 @@
+- There are many types of computer vision problems; image classification, object detection etc.
+- The earlier layers of a NN detects simpler stuff like edges followed by shapes then patterns and then to more complex stuff like faces etc.
+- You can detect vertical edges in an image using a filter and the convolution operator (which is really just *)
+- The idea behind the filter is that the left side of the filter is lighter, it doesnt matter what is in the middle and the right side is darker so when you convolve an image with the filter, you get a new image. In this new image, the parts where there are differences in colour are where the edges are at so if your image is dark light dark or light dark light, the difference is where the edges are at.
+- Horizontal filter is really like the vertical filter except the top is lighter, the middle row is whatever you want and the bottom row is darker.
+- There are many kinds of filter like the sobel, scharr filter etc.
+- Instead of handpicking the values you use in the filter, you could also treat them as parameters and learn them through back propagation. With this approach, you can find the best filter to use to detect the edges. You can even create diagonal filters!
+- Problem with naive convolution is that the image shrinks and that the information on the edge of the image is not really used much. By padding a layer around the image, you are able to solve both problems. By convention, you pad with 0s and p is the number of layers you are padding with.
+- 2 kinds of padding, valid (no padding) and same (input size is same as output size). For same sized convolution, formula is n + 2p + f + 1 so if you want to know how much to pad, you just solve for p i.e. n + 2p + f - 1 = n therefore p = (f-1)/2.
+- filter is normally odd sized.
+- Strided convolution lets you "hop" multiple rows / columns instead of doing them sequentially. Formula is (n + 2p - f) / s + 1
+- If the stride convolution doesn't apply nicely for the entire image i.e. an additional row, skip it. For you to be able to apply the filter e.g. a 3x3 filter, you need a corresponding 3x3 tile on the image.
+- In some math textbooks, convolutions are when you flip the filter on the horizontal and vertical axis but in deep learning literature, this is not the case!
+- You can also apply convolutions over volume. You just need to match the value of the last axis on the image with the value of the last axis on the filter. Multiply all of them and sum them together.
+- There's a nice video explaining going through the CNN formula and an example.
+- Notice that in general for CNNs, the size of the layer will start trending downwards and the number of channels will gradually increase. 
+- In CNNs, there are 3 types of layers - conv (convolution), pool (pooling, max and average pooling) and fc (fully connected).
+- conv is your traditional multiply + sum all, sometimes you might skip a few steps if you're using stride.
+- there are 2 kinds of pool layers, max pooling and average pooling. Instead of multiplying and summing, you're either taking the max or average value of the filtered section on the image.
+- fully connected is your traditional layer in chapters 1 and 2.
+- The first benefit of convolutions is parameter sharing which basically means that whatever that's useful in one part of the image is probably useful in another part of the image.
+- The second benefit of convolutions is sparsity of connections which means that in each layer, the output value is only dependent on a small number of inputs.
