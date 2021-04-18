@@ -2,5 +2,18 @@
 - Detection is when you have multiple objects (of potentially different categories) and you have to detect and localise them all!
 - Have the nn output 4 more numbers (bx, by, bh, bw) that parameterizes the bounding box of the object.
 - Y and y hat should contain > 5 values. pc, bx, by, bh, bw, c1...cn where pc, c1...cn is either 0 or 1.
+- The top left corner of the box is (0,0), bottom right corner is (1,1). bx and by are values between 0 and 1. bh and bw OTOH is a fraction of how much space does the object take in the box. bh and bw can be greater than 1.
 - pc = is there an object in this image that is one of the classes you want to classify. If pc is 0, every other row should be ?
 - The loss is calculated by summing the square of the difference between Yi hat and Yi ie (y1 hat - y1)^2 + (y2 hat - y2)^2 + (y3 hat - y3)^2...
+- The identity of your landmarks need to be consistent. For exmaple, if the first land mark is on the left side of your left eye, it needs to be that for all images in the training set.
+- You use a sliding window kind of algorithm to detect for objects but the problem with the naive implementation of this is it's computational costs.
+- You can use convolutions to help calculate the sliding window instead of cropping each section out and making multiple forward progations.
+- Another algorithm for object detection is the YOLO algorithm which is really just dividing the image into a grid (e.g. 3x3 or 9x9 etc) and for each cell, it returns a vector of 8 params. This these 8 params are similar to that of the object detection above.
+- The YOLO algorithm works as long as you don't have more than 1 object in each grid cell.
+- How you assign an object to which grid cell depends on the mid point of the object. If your object spans multiple box, the cell that contains the object's midpoint is the cell that the object is assigned to. 
+- YOLO algorithm uses convnet instead of normal iteration so for example, if you have an image that you divided into 3x3 then the output of the convnet layer is 3x3x8 where the depth = the vector of 8 params.
+- Use intersection over union (IoU) to evaluate your object localization. Theoretically, if IoU = 1 then it is exactly the same but in reality, as long as it is >= 0.5 (convention), it is okay. You can be more stringent with it. This is how you maps localisation with accuracy i.e. the number of times the object is correctly localised.
+- Non max suppression allows your algorithm to only detect an object once instead of registering it multiple times. The algorithm literally means supress all the cells that are not max. If you have multiple classes then you run the non max supression for each class.
+- Anchor boxes let your algorithm detect multiple objects in a single cell. Essentially you repeat the vector of 8 multiple times so it becomes a vector of 16, 24 etc. Each set of 8 values belong to each class. For example if you had 10 classes then it would be a vector of 10 so your entire Y output is a vector of 50 (5 * 10) where each set of 10 corresponds to the classes sequentially.
+- Instead of just looking at where the midpoint of the object lies, you also want to now take into consideration which anchor box the object has the highest IoU with so in the vidoe, they had the midpoint of a car and a human in a cell. The anchor box with the highest IoU with the car is the horizontal box and the vertical box for the human. The object is represented as (cell #, anchor box #). If there is only 1 object then the anchor box with the highest IoU remains the same, everything else is 0, ?, ?...?
+- The algorithm cannot handle if there are more objects than anchor boxes or if there are anchor box with the highest IoU overlaps for multiple objects.
