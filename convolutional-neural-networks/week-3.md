@@ -1,0 +1,6 @@
+- Localisation is about finding an object within an image.
+- Detection is when you have multiple objects (of potentially different categories) and you have to detect and localise them all!
+- Have the nn output 4 more numbers (bx, by, bh, bw) that parameterizes the bounding box of the object.
+- Y and y hat should contain > 5 values. pc, bx, by, bh, bw, c1...cn where pc, c1...cn is either 0 or 1.
+- pc = is there an object in this image that is one of the classes you want to classify. If pc is 0, every other row should be ?
+- The loss is calculated by summing the square of the difference between Yi hat and Yi ie (y1 hat - y1)^2 + (y2 hat - y2)^2 + (y3 hat - y3)^2...
