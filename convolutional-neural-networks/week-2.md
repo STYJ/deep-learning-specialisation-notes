@@ -1,0 +1,11 @@
+Some stuff on resnets, inception network and keras.
+
+- In a resnet, you take the output of the activation function of an earlier layer e.g. layer L and add it to the output of the Z function of a latter layer e.g. layer L + X, before applying the activation function of that layer i.e. g(Z[L+X] + A[L]). This is known as "skip connection" or "shortcut".
+- This allows you to build much deeper neural networks without having to worry too much about exploding or vanishing gradients.
+- Empirically, as you increase the number of layers, the training error will tend to decrease after a while but then they'll tend to go back up so in theory, as you make a neural network deeper, it should only do better and better on the training set. But in reality, having a plain network that is very deep means that all your optimization algorithm just has a much harder time training so your training error gets worse if you pick a network that's too deep. What happens with ResNet is that even as the number of layers gets deeper, you can have the performance of the training error going down. ResNets really help with the vanishing and exploding gradients problem but eventually this will also flatten out.
+- Traditionally, it is very hard to learn the identity function with a "plain network" which is why the deeper you go, the worse the performance but with ResNets, it is very easy for a residual block to learn the identity function i.e. a[l+2] = a[l] so you are almost guaranteed that network's performance wont be hurt with these additional layers from the residual block. 
+- Inception network is simply combining and concatenating multiple conv layers and pooling into a single layer. 
+- A 1x1 filter can help you to reduce n_C without modifying n_H and n_W. 
+- Pooling on the otherhand is used to reduce to reduce n_H and n_W instead of n_C.
+- Take advantage of transfer learning from models of open source projects to jump start your training.
+- If you don't have enough data, leverage on data augmentation.
