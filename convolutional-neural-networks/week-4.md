@@ -1,0 +1,15 @@
+- Face verification is given an image and a name, verify that this person is who they say he/she is.
+- Face recognition is given a database of images and an image K, verify that the person K belongs to the database.
+- You need to solve the one shot learning problem i.e. only given a single image / input, you need to determine if the person is recognised or not.
+- Image (input) -> Convnet -> softmax is not a good idea because you don't have enough training data for this! How many pictures of your employees do you have? What if you have a new employee? Do you have to train the neural network again?
+- Instead of recognising each individual employee, why dont you learn a "similarity function" i.e. how similar are the 2 images? If they are very similar, output a small value. If not, a big value. Repeat this for the current person that you want to recognise against all images in your database.
+- A popular neural network architecture for this is the siamese network.
+- Triplet loss looks at 3 images at the same time: an anchor image, the positive image (that matches the anchor) and a negative image (that doesn't match the anchor).
+- You can trivially solve the formula by setting everything to 0 so in order to avoid that, you just need to make sure that the difference (3:47 on the triplet loss video) + alpha is <= 0. Alpha is known as the margin.
+- You can't randomly choose the A(nchor), P(ositive) and N(egative) because then the condition will easily be fulfilled so the neural network won't learn much from it. You need to choose triplets that are hard to train on i.e. choose values for A, P and N such that D(A,P) is close to D(A,N)
+- Alternatively, you can just use a standard binary classification instead of the triplet loss neural network which outputs a 0 or a 1 depending on whether or not the 2 images are the same. Your "A" in Z = WA + B can be the sum of the absolute difference or maybe even chi squared.
+- neural style transfer is taking 2 images (A, B) and generating an image with the content of A and style of B.
+- If you use a very shallow neural network (few # of layers), it will force the network to use pixel values very similar to that of the content image.
+- If you use a very deep neural network, it will just find objects in the content and just "render" it somewhere in the generated image so in practice, don't choose a network that is too shallow or too deep (lol).
+- What does "correlation" mean? It just means which texture tend to occur / not occur together with other textures. The output G[l] will be of size n_C[l] x n_C[l] because you're comparing a channel with all the other channels in that layer.
+- You can easily generalise to 1D and 3D images by removing or adding an additional axis. For example, 2D = 14 n_H * 14 n_W * 3 n_C. Filter = 5 n_H * 5 n_W * 3 n_C, 16 filters, 1 stride, 0 padding = 10 n_W * 10 n_H * 16 n_C so for 1D, just remove the Y axis i.e. 14 x 3 applying 16 5 * 3 filters = 10 * 16 output.
